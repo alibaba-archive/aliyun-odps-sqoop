@@ -6,9 +6,9 @@ public class SqoopVersion {
   }
 
   public static final String VERSION="1.4.6-ODPS";
-  public static final String GIT_HASH="99897ba1fbf3bbc5fd5f658c13f4492a766401e2";
+  public static final String GIT_HASH="eb18de497b9520ef6f432be33b1e67c165e4995e";
   public static final String COMPILE_USER="tianli";
-  public static final String COMPILE_DATE="2015年11月18日 星期三 14时32分27秒 CST";
+  public static final String COMPILE_DATE="2015年11月25日 星期三 14时39分42秒 CST";
 
   @Override
   public String toString() {
