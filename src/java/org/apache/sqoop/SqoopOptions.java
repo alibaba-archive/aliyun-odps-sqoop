@@ -189,6 +189,16 @@ public class SqoopOptions implements Cloneable {
   @StoredAsProperty("odps.partition.spec") private String odpsPartitionSpec;
   @StoredAsProperty("hdfs.to.odps") private boolean hdfsToOdps;
 
+  public boolean isSkipFailed() {
+    return skipFailed;
+  }
+
+  public void setSkipFailed(boolean skipFailed) {
+    this.skipFailed = skipFailed;
+  }
+
+  @StoredAsProperty("skip.failed") private boolean skipFailed;
+
   public boolean isHdfsToOdps() {
     return hdfsToOdps;
   }
@@ -1061,6 +1071,9 @@ public class SqoopOptions implements Cloneable {
     this.odpsRetryCount = OdpsConstants.DEFAULT_RETRY_COUNT;
     this.odpsShardNum = OdpsConstants.DEFAULT_SHARD_NUM;
     this.odpsShardTimeout = OdpsConstants.DEFAULT_SHARD_TIMEOUT;
+
+    this.hdfsToOdps = false;
+    this.skipFailed = false;
   }
 
   /**

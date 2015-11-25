@@ -150,6 +150,7 @@ public abstract class BaseSqoopTool extends com.cloudera.sqoop.tool.SqoopTool {
       "input-optionally-enclosed-by";
   public static final String INPUT_ENCLOSED_BY_ARG = "input-enclosed-by";
   public static final String INPUT_ESCAPED_BY_ARG = "input-escaped-by";
+  public static final String SKIP_FAILED_ARG = "skip-failed";
   public static final String CODE_OUT_DIR_ARG = "outdir";
   public static final String BIN_OUT_DIR_ARG = "bindir";
   public static final String PACKAGE_NAME_ARG = "package-name";
@@ -705,6 +706,11 @@ public abstract class BaseSqoopTool extends com.cloudera.sqoop.tool.SqoopTool {
         .withLongOpt(INPUT_ESCAPED_BY_ARG)
         .create());
 
+    inputFormatOpts.addOption(OptionBuilder
+        .hasArg()
+        .withDescription("Skip the failed input")
+        .withLongOpt(SKIP_FAILED_ARG)
+        .create());
     return inputFormatOpts;
   }
 
@@ -1365,6 +1371,10 @@ public abstract class BaseSqoopTool extends com.cloudera.sqoop.tool.SqoopTool {
       out.setInputEscapedBy(SqoopOptions.toChar(
               in.getOptionValue(INPUT_ESCAPED_BY_ARG)));
       out.setExplicitInputDelims(true);
+    }
+
+    if (in.hasOption(SKIP_FAILED_ARG)) {
+      out.setSkipFailed(true);
     }
   }
 

@@ -337,6 +337,7 @@ public class JobBase {
     conf.set("mapreduce.job.user.classpath.first", "true");
     conf.set("mapreduce.user.classpath.first", "true");
     conf.set("mapreduce.task.classpath.user.precedence", "true");
+    conf.setBoolean(SqoopMapper.SKIP_FAILED_KEY, options.isSkipFailed());
   }
 
   /**

@@ -31,9 +31,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Tian Li on 15/9/29.
- */
 public class OdpsTunnelWriter extends OdpsWriter {
   public static final Log LOG = LogFactory.getLog(OdpsTunnelWriter.class.getName());
   private TableTunnel tunnel;

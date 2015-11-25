@@ -31,12 +31,17 @@ import java.io.IOException;
 public abstract class SqoopMapper<KI, VI, KO, VO>
   extends Mapper<KI, VI, KO, VO> {
 
+  public final static String SKIP_FAILED_KEY = "skip.failed";
+  protected boolean skipFailed = false;
+
   @Override
   protected void setup(Context context)
     throws IOException, InterruptedException {
     super.setup(context);
 
     Configuration configuration = context.getConfiguration();
+
+    skipFailed = configuration.getBoolean(SKIP_FAILED_KEY, false);
 
     // Propagate verbose flag if needed
     if (configuration.getBoolean(JobBase.PROPERTY_VERBOSE, false)) {
