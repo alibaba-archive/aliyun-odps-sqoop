@@ -707,7 +707,6 @@ public abstract class BaseSqoopTool extends com.cloudera.sqoop.tool.SqoopTool {
         .create());
 
     inputFormatOpts.addOption(OptionBuilder
-        .hasArg()
         .withDescription("Skip the failed input")
         .withLongOpt(SKIP_FAILED_ARG)
         .create());

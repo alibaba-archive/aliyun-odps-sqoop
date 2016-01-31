@@ -79,8 +79,34 @@ public class TextExportMapper
 
   public void map(LongWritable key, Text val, Context context)
       throws IOException, InterruptedException {
+
     try {
       recordImpl.parse(val);
+    } catch (Exception e) {
+      // Something bad has happened
+      LOG.error("");
+      LOG.error("Exception raised during data parse");
+      LOG.error("");
+
+      LOG.error("Exception: ", e);
+      LOG.error("On input: " + val);
+
+      InputSplit is = context.getInputSplit();
+      if (is instanceof FileSplit) {
+        LOG.error("On input file: " + ((FileSplit)is).getPath());
+      } else if (is instanceof CombineFileSplit) {
+        LOG.error("On input file: "
+          + context.getConfiguration().get("map.input.file"));
+      }
+      LOG.error("At position " + key);
+      LOG.error("Currently processing split:");
+      LOG.error(is);
+
+      if (!skipFailed) {
+        throw new IOException("Can't export data, please check failed map task logs", e);
+      }
+    }
+    try {
       context.write(recordImpl, NullWritable.get());
     } catch (Exception e) {
       // Something bad has happened
@@ -96,7 +122,7 @@ public class TextExportMapper
         LOG.error("On input file: " + ((FileSplit)is).getPath());
       } else if (is instanceof CombineFileSplit) {
         LOG.error("On input file: "
-          + context.getConfiguration().get("map.input.file"));
+            + context.getConfiguration().get("map.input.file"));
       }
       LOG.error("At position " + key);
 
@@ -108,10 +134,7 @@ public class TextExportMapper
       LOG.error("This issue might not necessarily be caused by current input");
       LOG.error("due to the batching nature of export.");
       LOG.error("");
-
-      if (!skipFailed) {
-        throw new IOException("Can't export data, please check failed map task logs", e);
-      }
+      throw new IOException("Can't export data, please check failed map task logs", e);
     }
   }
 }
