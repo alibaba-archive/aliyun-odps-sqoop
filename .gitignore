@@ -32,6 +32,7 @@ target
 # Sqoop1 specific
 .ant-targets-build.xml
 .launches
+/build
 /build.properties
 /conf/managers.d
 /conf/tools.d
