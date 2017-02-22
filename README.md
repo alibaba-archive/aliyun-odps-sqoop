@@ -1,3 +1,5 @@
+### Moved to aliyun/aliyun-maxcompute-data-collectors: https://github.com/aliyun/aliyun-maxcompute-data-collectors 
+
 # Sqoop-ODPS
 
 This is the extension of Apache Sqoop project. Sqoop-ODPS allows imports and exports of data sets between databases and ODPS tables.
